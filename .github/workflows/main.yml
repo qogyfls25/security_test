@@ -1,0 +1,18 @@
+name: Security-Check-Robot  # 로봇 이름
+
+on: [push]  # 내가 파일을 수정해서 올릴(Push) 때마다 실행해라!
+
+jobs:
+  run-security-scan:
+    runs-on: ubuntu-latest  # 리눅스 컨테이너 환경을 하나 빌려줘!
+    steps:
+      - name: Get-My-Code
+        uses: actions/checkout@v3  # 내 저장소에 있는 파일들을 리눅스로 가져와!
+
+      - name: Set-up-Python
+        uses: actions/setup-python@v4  # 파이썬을 설치해줘!
+        with:
+          python-version: '3.9'
+
+      - name: Run-Scan-Script
+        run: python security_scan.py  # 내가 만든 파이썬 스크립트를 실행해!
